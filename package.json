@@ -9,15 +9,23 @@
   "private": false,
   "dependencies": {
     "dotenv": "^16.0.2",
+    "eslint": "^8.0.1",
     "express": "^4.18.1",
     "ts-node": "^10.9.1",
-    "typescript": "^4.8.3"
+    "typescript": "*"
   },
   "scripts": {
-    "up": "ts-node index.ts"
+    "up": "ts-node index.ts",
+    "build": "docker build -t truflation/fee-server . --no-cache",
+    "lint": "eslint *.ts"
   },
   "devDependencies": {
     "@types/express": "^4.17.14",
-    "@types/node": "^18.7.18"
+    "@types/node": "^18.7.18",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "eslint-config-standard-with-typescript": "^23.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0"
   }
 }
