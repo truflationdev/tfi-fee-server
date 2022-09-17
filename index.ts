@@ -13,8 +13,8 @@ app.use(bodyParser.json())
 app.post('/', (req: Request, res: Response) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
   let feeSent = BigNumber(req?.body?.feeSent)
-  if (isNaN(feeSent)) {
-    feeSent = 0
+  if (feeSent.isNaN()) {
+    feeSent = BigNumber(0)
   }
 
   const feeCharged = BigNumber(100000000000000000)
