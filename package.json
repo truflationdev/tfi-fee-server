@@ -8,6 +8,8 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "bignumber.js": "^9.1.0",
+    "body-parser": "^1.20.0",
     "dotenv": "^16.0.2",
     "eslint": "^8.0.1",
     "express": "^4.18.1",
@@ -17,7 +19,7 @@
   "scripts": {
     "up": "ts-node index.ts",
     "build": "docker build -t truflation/fee-server . --no-cache",
-    "lint": "eslint *.ts",
+    "lint": "eslint *.ts test/**/*.ts",
     "test": "ts-mocha test/**/*.ts --exit"
   },
   "devDependencies": {

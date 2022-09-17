@@ -1,21 +1,27 @@
 import express, { Request, Response } from 'express'
 import dotenv from 'dotenv'
+import BigNumber from 'bignumber.js'
+import bodyParser from 'body-parser'
 
 dotenv.config()
 
 const app = express()
 const port = 8080
 
+app.use(bodyParser.json())
+
 app.post('/', (req: Request, res: Response) => {
-  let feeSent: number = parseInt(toString(req.feeSent))
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
+  let feeSent = BigNumber(req?.body?.feeSent)
   if (isNaN(feeSent)) {
     feeSent = 0
   }
-  const feeCharged = 100000000000000000
+
+  const feeCharged = BigNumber(100000000000000000)
   if (feeSent < feeCharged) {
     res.json({
       queue: 'fail',
-      feeSent: feeSent,
+      feeSent,
       feeCharged: 0,
       feeRefund: feeSent
     })
@@ -23,9 +29,9 @@ app.post('/', (req: Request, res: Response) => {
   }
   res.json({
     queue: 'main',
-    feeSent: feeSent,
-    feeCharged: feeCharged,
-    feeRefund: feeSent - feeSent
+    feeSent,
+    feeCharged,
+    feeRefund: feeSent.minus(feeCharged)
   })
 })
 
