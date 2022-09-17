@@ -1,7 +1,8 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2021: true,
+    mocha: true
   },
   extends: 'standard-with-typescript',
   overrides: [
@@ -26,5 +27,8 @@ module.exports = {
     sourceType: 'module'
   },
   rules: {
-  }
+  },
+  "plugins": [
+    "mocha"
+  ]
 }

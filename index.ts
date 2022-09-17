@@ -1,11 +1,11 @@
-import express, { Request, Response } from 'express'
+import express, { Express, Request, Response } from 'express'
 import dotenv from 'dotenv'
 import BigNumber from 'bignumber.js'
 import bodyParser from 'body-parser'
 
 dotenv.config()
 
-const app = express()
+export const app: Express = express()
 const port = 8080
 
 app.use(bodyParser.json())
@@ -34,10 +34,6 @@ app.post('/', (req: Request, res: Response) => {
     feeRefund: feeSent.minus(feeCharged)
   })
 })
-
-module.exports = {
-  app
-}
 
 if (require.main === module) {
   app.listen(port, () => {

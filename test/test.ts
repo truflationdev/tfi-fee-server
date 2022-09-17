@@ -4,11 +4,12 @@ import axios from 'axios'
 import assert from 'assert'
 import dotenv from 'dotenv'
 dotenv.config()
-const url = process.env.URL_ADAPTER || 'http://localhost:8080/'
+const url: string = process.env.URL_ADAPTER ?? 'http://localhost:8080/'
+app.listen(process.env.EA_PORT ?? 8080)
 
-function testPacket (packet, response) {
+function testPacket (packet, response): void {
   return async () => {
-    const { data } = await axios.post(
+    const data = await axios.post(
       url,
       packet,
       {
@@ -17,19 +18,12 @@ function testPacket (packet, response) {
         }
       })
     if (response !== undefined) {
-      assert.deepEqual(data, response)
+      assert.deepEqual(data?.data, response)
     }
   }
 }
 
 describe('Test', () => {
-  let server
-  before(() => {
-    server = app.listen(process.env.EA_PORT || 8080)
-  })
-  after(() => {
-    server.close()
-  })
   it('fail - no fee sent', testPacket({
     service: 'bad service',
     data: { foo: [30, 10530, 'string'] },
