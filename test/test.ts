@@ -5,6 +5,7 @@ import assert from 'assert'
 import dotenv from 'dotenv'
 dotenv.config()
 const url: string = process.env.URL_ADAPTER ?? 'http://localhost:8080/'
+app.listen(process.env.EA_PORT ?? 8080)
 
 function testPacket (packet, response): void {
   return async () => {
@@ -23,14 +24,6 @@ function testPacket (packet, response): void {
 }
 
 describe('Test', () => {
-  let server
-  before(() => {
-    server = app.listen(process.env.EA_PORT ?? 8080)
-  })
-  after(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-    server.close()
-  })
   it('fail - no fee sent', testPacket({
     service: 'bad service',
     data: { foo: [30, 10530, 'string'] },
