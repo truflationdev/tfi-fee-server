@@ -4,7 +4,7 @@ RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 
 WORKDIR /home/node/app
 
-COPY package.json yarn.lock index.ts ./
+COPY package.json tsconfig.json yarn.lock index.ts ./
 
 RUN yarn --frozen-lockfile
 
